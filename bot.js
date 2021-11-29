@@ -34,7 +34,7 @@ async function onMessageHandler(target, context, msg, self) {
     const stats = await leaderboardSvc();
     client.say(
       target,
-      `🎖️ Rank #${stats.rank} - 🎮 ELO ${stats.elo} - 📈 Racha de ${stats.winStreak}. Búscame por aquí https://www.ageofempires.com/stats/ageiiide`
+      `🎖️ Rank #${stats.rank} ╪╪ 🎮 ELO ${stats.elo} ╪╪ 📈 Racha de ${stats.winStreak}`
     );
     console.log(`* Executed ${commandName} command`);
   } else {
