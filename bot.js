@@ -5,9 +5,9 @@ const leaderboardSvc = require("./leaderboard.service.js");
 const opts = {
   identity: {
     username: process.env.BOT_USERNAME,
-    password: process.env.OAUTH_TOKEN
+    password: process.env.OAUTH_TOKEN,
   },
-  channels: [process.env.CHANNEL_NAME]
+  channels: [process.env.CHANNEL_NAME],
 };
 
 // Create a client with our options
@@ -32,11 +32,10 @@ async function onMessageHandler(target, context, msg, self) {
   // If the command is known, let's execute it
   if (commandName === "!elo") {
     const stats = await leaderboardSvc();
-    const prefixWinStreak = stats.winStreak > 0 ? '+' : '' 
-    client.say(
-      target,
-      `🎖️ Rank #${stats.rank} ╪ 🎮 ELO ${stats.elo} ╪ 📈 Racha de ${prefixWinStreak}${stats.winStreak}`
-    );
+    const prefixWinStreak = stats.winStreak > 0 ? "+" : "";
+    client.say(target, `🎖️ Rank #${stats.rank}`);
+    client.say(target, `🎮 ELO ${stats.elo}`);
+    client.say(target, `📈 Racha de ${prefixWinStreak}${stats.winStreak}`);
     console.log(`* Executed ${commandName} command`);
   } else {
     console.log(`* Unknown command ${commandName}`);
