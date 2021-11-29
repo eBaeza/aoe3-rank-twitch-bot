@@ -32,9 +32,10 @@ async function onMessageHandler(target, context, msg, self) {
   // If the command is known, let's execute it
   if (commandName === "!elo") {
     const stats = await leaderboardSvc();
+    const prefixWinStreak = stats.winStreak > 0 ? '+' : '' 
     client.say(
       target,
-      `🎖️ Rank #${stats.rank} ╪ 🎮 ELO ${stats.elo} ╪ 📈 Racha de ${stats.winStreak}`
+      `🎖️ Rank #${stats.rank} ╪ 🎮 ELO ${stats.elo} ╪ 📈 Racha de ${prefixWinStreak}${stats.winStreak}`
     );
     console.log(`* Executed ${commandName} command`);
   } else {
