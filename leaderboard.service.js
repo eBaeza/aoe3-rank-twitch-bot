@@ -1,25 +1,21 @@
 var axios = require("axios");
-var data = JSON.stringify({
-  region: "7",
-  matchType: "1",
-  searchPlayer: "Dori",
-  page: 1,
-  count: 100
-});
 
 var config = {
-  method: "post",
-  url: "https://api.ageofempires.com/api/ageiii/Leaderboard",
-  headers: {
-    "content-type": "application/json"
-  },
-  data: data
+  method: 'get',
+  url: 'https://aoeiv.net/api/leaderboard',
+  params: {
+    game: 'aoe3de',
+    leaderboard_id: 1,
+    start: 1,
+    count: 1,
+    profile_id: 3610651
+  }
 };
 
 async function leaderboarSvc() {
   try {
     const resp = await axios(config);
-    const [stats] = resp.data.items;
+    const [stats] = resp.data.leaderboard;
     return stats;
   } catch (error) {
     console.log(error);

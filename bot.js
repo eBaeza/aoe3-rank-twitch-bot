@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv-flow').config()
+}
+
 const tmi = require("tmi.js");
 const leaderboardSvc = require("./leaderboard.service.js");
 
@@ -32,10 +36,11 @@ async function onMessageHandler(target, context, msg, self) {
   // If the command is known, let's execute it
   if (commandName === "!elo") {
     const stats = await leaderboardSvc();
-    const prefixWinStreak = stats.winStreak > 0 ? "+" : "";
+    const prefixStreak = stats.streak > 0 ? "+" : "";
+    client.say(target, `😉 [${stats.clan}] ${stats.name}`);
     client.say(target, `🎖️ Rank #${stats.rank}`);
-    client.say(target, `🎮 ELO ${stats.elo}`);
-    client.say(target, `📈 Racha de ${prefixWinStreak}${stats.winStreak}`);
+    client.say(target, `🎮 ELO ${stats.rating}`);
+    client.say(target, `📈 Racha de ${prefixStreak}${stats.streak}`);
     console.log(`* Executed ${commandName} command`);
   } else {
     console.log(`* Unknown command ${commandName}`);
