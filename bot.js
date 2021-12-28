@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === 'development') {
 const tmi = require("tmi.js");
 const leaderboardSvc = require("./leaderboard.service.js");
 const http = require('http');
+const PORT = process.env.PORT || 3000
 
 // Define configuration options
 const opts = {
@@ -57,6 +58,6 @@ function onConnectedHandler(addr, port) {
 http.createServer(function (req, res) {
   res.write('Doribot working!');
   res.end();
-}).listen(3000, function(){
- console.log("server start at port 3000");
+}).listen(PORT, function(){
+ console.log(`server start at port ${PORT}`);
 });
