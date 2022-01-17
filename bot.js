@@ -39,7 +39,7 @@ async function onMessageHandler(target, context, msg, self) {
   if (commandName === "!elo") {
     const stats = await leaderboardSvc();
     const prefixStreak = stats.streak > 0 ? "+" : "";
-    client.say(target, `😉 [${stats.clan}] ${stats.name}`);
+    client.say(target, `😉 ${stats.name}`);
     client.say(target, `🎖️ Rank #${stats.rank}`);
     client.say(target, `🎮 ELO ${stats.rating}`);
     client.say(target, `📈 Racha de ${prefixStreak}${stats.streak}`);
