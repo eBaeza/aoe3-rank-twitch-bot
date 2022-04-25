@@ -38,6 +38,12 @@ async function onMessageHandler(target, context, msg, self) {
   // If the command is known, let's execute it
   if (commandName === "!elo") {
     const stats = await leaderboardSvc(searchName);
+
+    if (!stats) {
+      client.say(target, `😥 No results`);
+      return
+    }
+
     const prefixStreak = stats.streak > 0 ? "+" : "";
     const clan = stats.clan ? `[${stats.clan}] ` : ''
 
