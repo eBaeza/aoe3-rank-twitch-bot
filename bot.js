@@ -33,13 +33,15 @@ async function onMessageHandler(target, context, msg, self) {
   } // Ignore messages from the bot
 
   // Remove whitespace from chat message
-  const commandName = msg.trim();
-
+  const [commandName, searchName] = msg.trim().split(' ');
+  console.log(commandName, searchName)
   // If the command is known, let's execute it
   if (commandName === "!elo") {
-    const stats = await leaderboardSvc();
+    const stats = await leaderboardSvc(searchName);
     const prefixStreak = stats.streak > 0 ? "+" : "";
-    client.say(target, `😉 ${stats.name}`);
+    const clan = stats.clan ? `[${stats.clan}] ` : ''
+
+    client.say(target, `🙅🏽 ${clan}${stats.name}`);
     client.say(target, `🎖️ Rank #${stats.rank}`);
     client.say(target, `🎮 ELO ${stats.rating}`);
     client.say(target, `📈 Racha de ${prefixStreak}${stats.streak}`);
