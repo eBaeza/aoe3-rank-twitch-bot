@@ -17,7 +17,7 @@ async function leaderboarSvc(searchValue = '') {
       config.params.search = searchValue.trim()
       config.params.profile_id = undefined
     } else {
-      config.params.profile_id = 3610651
+      config.params.profile_id = 5718291
       config.params.search = undefined
     }
     const resp = await axios(config);
