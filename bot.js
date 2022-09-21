@@ -44,13 +44,12 @@ async function onMessageHandler(target, context, msg, self) {
       return
     }
 
-    const prefixStreak = stats.streak > 0 ? "+" : "";
-    const clan = stats.clan ? `[${stats.clan}] ` : ''
+    const prefixStreak = stats.winStreak > 0 ? "+" : "";
 
-    client.say(target, `🙅🏽 ${clan}${stats.name}`);
+    client.say(target, `🙅🏽 ${stats.userName}`);
     client.say(target, `🎖️ Rank #${stats.rank}`);
-    client.say(target, `🎮 ELO ${stats.rating}`);
-    client.say(target, `📈 Racha de ${prefixStreak}${stats.streak}`);
+    client.say(target, `🎮 ELO ${stats.elo}`);
+    client.say(target, `📈 Racha de ${prefixStreak}${stats.winStreak}`);
     console.log(`* Executed ${commandName} command`);
   } else {
     console.log(`* Unknown command ${commandName}`);

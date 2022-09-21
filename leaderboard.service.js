@@ -1,31 +1,29 @@
 var axios = require("axios");
 
 var config = {
-  method: 'get',
-  url: 'https://aoeiv.net/api/leaderboard',
-  params: {
-    game: 'aoe3de',
-    leaderboard_id: 1,
-    start: 1,
-    count: 1,
+  method: 'post',
+  url: 'https://api.ageofempires.com/api/ageiii/Leaderboard',
+  data: {
+    matchType: "1",
+    region: "7",
+    searchPlayer: process.env.USER_ID
   }
 };
 
 async function leaderboarSvc(searchValue = '') {
   try {
     if (searchValue.trim()) {
-      config.params.search = searchValue.trim()
-      config.params.profile_id = undefined
+      config.data.searchPlayer = searchValue.trim()
     } else {
-      config.params.profile_id = 5718291
-      config.params.search = undefined
+      config.data.searchPlayer = process.env.USER_ID
     }
     const resp = await axios(config);
-    const [stats] = resp.data.leaderboard;
+    if (!resp.data) return null
+    const [stats] = resp.data.items;
     return stats;
   } catch (error) {
     console.log(error);
-    return {};
+    return null;
   }
 }
 
